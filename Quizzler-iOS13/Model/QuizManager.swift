@@ -12,7 +12,8 @@ class QuizManager {
     private var questions: [Question]
     private(set) var currentQuestionIndex = 0
     private(set) var score = 0
-
+    
+    // computed properties: dynamically calculated when asked for. 
     var totalQuestions: Int{
         return questions.count
     }
@@ -25,8 +26,13 @@ class QuizManager {
         return questions[currentQuestionIndex]
     }
     
-    func answerCurrentQuestion(with answer: Bool) -> Bool {
-        let result = getCurrentQuestion().answer == answer
+    func getCurrentAnswerChoice() -> [String] {
+        print("Answer Choices: \(questions[currentQuestionIndex].answer)")
+        return questions[currentQuestionIndex].answer
+    }
+    
+    func answerCurrentQuestion(with answer: String) -> Bool {
+        let result = getCurrentQuestion().correctAnswer == answer
         if result { score += 1 }
         return result
     }
